@@ -47,8 +47,8 @@ class Maze:
         if 0 <= nx < self.height and 0 <= ny < self.width:
             self.grid[nx][ny].walls[opposites[direction]] = False
 
-    def display_solution(self, path):
-        """Affiche le labyrinthe avec le chemin de solution (marqué par '*')."""
+    def display_solution(self, path, char='*'):
+        """Affiche le labyrinthe avec le chemin de solution (marqué par 'char')."""
         path_set = set(path)
         for row in range(self.height):
             # Ligne des murs nord
@@ -59,7 +59,7 @@ class Maze:
             for col in range(self.width):
                 print("|" if self.grid[row][col].walls['W'] else " ", end="")
                 if (row, col) in path_set:
-                    print(" * ", end="")
+                    print(f" {char} ", end="")
                 else:
                     print("   ", end="")
             print("|")
