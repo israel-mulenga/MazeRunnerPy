@@ -71,7 +71,7 @@ def main():
                     solution = bfs_solve(maze, start, end)
                 print("\nLabyrinthe résolu :")
                 if solution:
-                    maze.display_solution(solution, "o")
+                    maze.display_solution(solution, char='*' if algo == "1" else 'o')
                 else:
                     print("Aucune solution trouvée.")
                 save = input("Enregistrer ce labyrinthe et sa solution ? (o/n) : ")

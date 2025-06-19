@@ -48,23 +48,40 @@ class Maze:
         if 0 <= nx < self.height and 0 <= ny < self.width:
             self.grid[nx][ny].walls[opposites[direction]] = False
 
-    def display_solution(self, path, char='*'):
-        """Affiche le labyrinthe avec le chemin de solution (marqué par 'char')."""
+    def display_solution(self, path, char='*', start_char='S', end_char='E'):
+        """Affiche le labyrinthe avec le chemin (personnalisé) dans une seule boucle par ligne."""
         path_set = set(path)
+        start_pos = path[0]
+        end_pos = path[-1]
+
         for row in range(self.height):
-            # Ligne des murs nord
+            top = ""
+            middle = ""
             for col in range(self.width):
-                print("+---" if self.grid[row][col].walls['N'] else "+   ", end="")
-            print("+")
-            # Ligne des murs ou du chemin
-            for col in range(self.width):
-                print("|" if self.grid[row][col].walls['W'] else " ", end="")
-                if (row, col) in path_set:
-                    print(f" {char} ", end="")
+                cell = self.grid[row][col]
+
+                # Haut du bloc (mur nord)
+                top += "+---" if cell.walls['N'] else "+   "
+
+                # Mur ouest
+                middle += "|" if cell.walls['W'] else " "
+
+                # Contenu de la cellule
+                pos = (row, col)
+                if pos == start_pos:
+                    middle += f" {start_char} "
+                elif pos == end_pos:
+                    middle += f" {end_char} "
+                elif pos in path_set:
+                    middle += f" {char} "
                 else:
-                    print("   ", end="")
-            print("|")
-        # Dernière ligne des murs sud
-        for col in range(self.width):
-            print("+---", end="")
-        print("+")
+                    middle += "   "
+
+            # Fermeture du top et du middle
+            top += "+"
+            middle += "|" if self.grid[row][-1].walls['E'] else " "
+            print(top)
+            print(middle)
+
+        # Dernière ligne (mur sud)
+        print("".join("+---" if self.grid[-1][col].walls['S'] else "+   " for col in range(self.width)) + "+")
