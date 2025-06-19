@@ -22,8 +22,3 @@ def generate_maze(height, width):
             cell.visited = False
     return maze
 
-if __name__ == "__main__":
-    width = 10  # Example width
-    height = 10  # Example height
-    generated_maze = generate_maze(width, height)
-    generated_maze.display()  # Assuming display method is defined in Maze class
