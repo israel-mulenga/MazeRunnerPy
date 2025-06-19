@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 src/test_maze.py
 premierTest
+=======
+premierTest
+/pdfCode
+>>>>>>> module1
+__pycache__/
+*.pyc

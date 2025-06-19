@@ -13,25 +13,26 @@ class Maze:
 
     def display(self):
         for row in range(self.height):
-            # Print the north walls
+            # Ligne 1 : murs Nord
+            top = ""
+            middle = ""
             for col in range(self.width):
-                if self.grid[row][col].walls['N']:
-                    print("+---", end="")
-                else:
-                    print("+   ", end="")
-            print("+")
-            # Print the west walls and the cell itself
-            for col in range(self.width):
-                if self.grid[row][col].walls['W']:
-                    print("|", end="")
-                else:
-                    print(" ", end="")
-                print("   ", end="")
-            print("|")
-        # Print the south walls of the last row
+                # Coin + mur nord
+                top += "+" + ("---" if self.grid[row][col].walls['N'] else "   ")
+                # Mur ouest + espace cellule
+                middle += ("|" if self.grid[row][col].walls['W'] else " ") + "   "
+            top += "+"  # Dernier coin
+            middle += "|"  # Bord droit de la ligne
+            print(top)
+            print(middle)
+        
+        # Ligne finale : murs Sud du dernier rang
+        bottom = ""
         for col in range(self.width):
-            print("+---", end="")
-        print("+")
+            bottom += "+---"
+        bottom += "+"
+        print(bottom)
+
 
     def break_wall(self, x, y, direction):
         """Casse le mur de la cellule (x, y) dans la direction donnée et le mur opposé du voisin."""
