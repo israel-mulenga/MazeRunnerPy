@@ -1,9 +1,11 @@
 <<<<<<< HEAD
-src/test_maze.py
+/tests
 premierTest
 =======
 premierTest
 /pdfCode
 >>>>>>> module1
-__pycache__/
+**/__pycache__/
 *.pyc
+*.pyo
+images/
